@@ -1,1 +1,1 @@
-https://storage.googleapis.com/tymestack-artifacts/1/model/model.bst
+https://storage.googleapis.com/tymestack-artifacts/2/model/model.bst
