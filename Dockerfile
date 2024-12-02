@@ -8,7 +8,7 @@ COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Download the new version model
-RUN CURL -X GET -o current.bst "https://storage.googleapis.com/tymestack-artifacts/housing-prediction/current.bst"
+RUN curl -X GET -o current.bst "https://storage.googleapis.com/tymestack-artifacts/housing-prediction/current.bst"
 
 # Expose the port for FastAPI
 EXPOSE 8000
