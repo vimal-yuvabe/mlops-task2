@@ -4,7 +4,7 @@ import pandas as pd
 from pydantic import BaseModel
 
 # Load pre-trained model
-MODEL_PATH = "./model.bst"
+MODEL_PATH = "./current.bst"
 model = xgb.Booster()
 model.load_model(MODEL_PATH)
 
