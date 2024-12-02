@@ -1,1 +1,2 @@
 Deploy the latest version for changes in the training dataset
+Deploy for testing the CR
