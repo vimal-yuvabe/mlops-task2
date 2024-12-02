@@ -49,7 +49,7 @@ def validate_model():
     """Validate the new model and compare its accuracy with the previous model."""
     # Read the model URL
     current_model_url = "https://storage.googleapis.com/tymestack-artifacts/housing-prediction/current.bst"
-    best_model_url = "https://storage.googleapis.com/tymestack-artifacts/housing-prediction/best.bst"
+    best_model_url = "https://storage.googleapis.com/tymestack-artifacts/housing-prediction/new.bst"
     
     # Download the new model
    
