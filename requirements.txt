@@ -4,3 +4,4 @@ xgboost-cpu
 pandas
 scikit-learn
 requests
+google-cloud-storage
