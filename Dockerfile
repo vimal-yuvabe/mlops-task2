@@ -1,8 +1,5 @@
 # Use official Python image as base
-FROM python:3.10-slim
-
-# Install curl
-RUN apt install -y curl
+FROM python:3.10
 
 # Copy application files
 COPY . .
