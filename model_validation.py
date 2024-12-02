@@ -4,7 +4,22 @@ from sklearn.metrics import mean_squared_error
 import requests
 import os
 import sys
-import shutil
+from google.cloud import storage
+
+
+
+def upload_best_model(model_name):
+    """Uploads a file to the bucket."""
+    # Create a storage client
+    storage_client = storage.Client()
+
+    # Get the bucket
+    bucket = storage_client.bucket("tymestack-artifacts")
+
+    # Create a new blob and upload the file
+    blob = bucket.blob("housing-prediction/current.bst")
+    blob.upload_from_filename(model_name)
+
 
 def download_model(url: str, save_path: str):
     """Download the model from the given URL."""
@@ -33,15 +48,16 @@ def predict_model(model_path):
 def validate_model():
     """Validate the new model and compare its accuracy with the previous model."""
     # Read the model URL
-    with open('./model_version.txt', 'r') as f:
-        model_url = f.read().strip()
-
+    current_model_url = "https://storage.googleapis.com/tymestack-artifacts/housing-prediction/current.bst"
+    best_model_url = "https://storage.googleapis.com/tymestack-artifacts/housing-prediction/best.bst"
+    
     # Download the new model
-    new_model_path = './new_model.bst'
-    download_model(model_url, new_model_path)
+   
+    download_model(best_model_url, './best.bst')
+    download_model(current_model_url,'./current.bst')
 
-    current_mse = predict_model('./model.bst')
-    new_mse = predict_model('./new_model.bst')
+    current_mse = predict_model('./current.bst')
+    new_mse = predict_model('./best.bst')
 
     # Exit if new accuracy is not better
     if new_mse >= current_mse:
@@ -50,6 +66,8 @@ def validate_model():
     else:
         # If new model is better, replace the old model
         print("New model is better. Updating deployment package.")
-        shutil.move(new_model_path, './model.bst')
+        # Upload the new model to bucket
+        upload_best_model("./best.bst")
 if __name__ == "__main__":
-    validate_model()
+    # validate_model()
+    upload_best_model("./current.bst")
