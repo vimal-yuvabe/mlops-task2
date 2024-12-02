@@ -69,5 +69,5 @@ def validate_model():
         # Upload the new model to bucket
         upload_best_model("./best.bst")
 if __name__ == "__main__":
-    # validate_model()
-    upload_best_model("./current.bst")
+    validate_model()
+    
